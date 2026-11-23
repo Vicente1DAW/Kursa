@@ -57,8 +57,10 @@ Los errores no controlados pasan por `errorHandler`, que registra el error y dev
 
 ## 4. Autenticación y autorización
 
-- **Registro/Login** devuelven `accessToken` y `refreshToken`.
+- **Registro** devuelve el usuario creado (sin `passwordHash`); **Login** devuelve `accessToken`, `refreshToken` y los datos públicos del usuario.
 - El access token se firma con `JWT_SECRET` y el refresh con `REFRESH_TOKEN_SECRET`.
+- **Refresh** valida el refresh token y comprueba que el usuario siga existiendo antes de emitir un nuevo access token.
+- **Logout** cierra la sesión en el cliente; al ser JWT stateless, el cliente debe descartar ambos tokens.
 - El middleware `authenticate` valida el header `Authorization: Bearer <token>` y adjunta el payload a `req.user`.
 - `authorize(...roles)` restringe el acceso por rol (`admin`, `profesor`, `estudiante`).
 
@@ -95,10 +97,10 @@ Eventos principales:
 | Decisión | Motivo |
 | :--- | :--- |
 | Drizzle en lugar de un ORM pesado | Ligero, tipado y compatible con entornos serverless (Neon). |
-| Zod para validación | Un único esquema tipado compartido entre controladores y tests. |
+| Zod para validación | Un único esquema tipado compartido entre controladores y pruebas. |
 | Socket.IO sobre el mismo servidor | Simplicidad de despliegue y sesión compartida. |
 | Respuestas uniformes | Facilita el consumo desde el frontend y el manejo de errores. |
 
 ## 9. Documentos relacionados
 
-- [API.md](API.md) · [DATABASE.md](DATABASE.md) · [QUALITY.md](QUALITY.md)
+- [API.md](API.md) · [DATABASE.md](DATABASE.md) · [política de calidad](../CALIDAD.md)

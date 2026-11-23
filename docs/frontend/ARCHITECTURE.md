@@ -2,7 +2,7 @@
 
 ## 1. Visión general
 
-Kursa Frontend es una **SPA** con React 18 y Vite que consume la API REST y el canal WebSocket del [backend](https://github.com/Lucherpar/Kursa_Backend).
+Kursa Frontend es una **SPA** con React 18 y Vite que consume la API REST y el canal WebSocket del [backend](../backend/README.md).
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -69,11 +69,11 @@ Detalle en [FRONTEND.md](FRONTEND.md).
 - **Zod** para los esquemas (`src/schemas/`) y mensajes de error.
 - `@hookform/resolvers` conecta ambos.
 
-## 8. Accesibilidad y responsive
+## 8. Accesibilidad y adaptable
 
 - HTML semántico y etiquetas asociadas a los campos.
 - Foco visible y contraste según WCAG.
-- Diseño *mobile-first* con utilidades responsive de Tailwind.
+- Diseño *mobile-first* con utilidades adaptable de Tailwind.
 
 ## 9. Decisiones de diseño
 
@@ -87,4 +87,4 @@ Detalle en [FRONTEND.md](FRONTEND.md).
 
 ## 10. Documentos relacionados
 
-- [FRONTEND.md](FRONTEND.md) · [QUALITY.md](QUALITY.md) · [INSTALLATION.md](INSTALLATION.md)
+- [FRONTEND.md](FRONTEND.md) · [política de calidad](../CALIDAD.md) · [INSTALLATION.md](INSTALLATION.md)

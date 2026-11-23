@@ -28,18 +28,19 @@ Roles: `admin`, `profesor`, `estudiante`.
 
 ---
 
-## Auth
+## Autenticación
 
-| Método | Ruta | Auth | Body | Descripción |
+| Método | Ruta | Autenticación | Datos de entrada | Descripción |
 | :--- | :--- | :---: | :--- | :--- |
-| `POST` | `/auth/register` | — | `{ email, password, role? }` | Registro. Devuelve el usuario creado. |
-| `POST` | `/auth/login` | — | `{ email, password }` | Login. Devuelve `accessToken` y `refreshToken`. |
-| `POST` | `/auth/refresh` | — | `{ refreshToken }` | Devuelve un nuevo `accessToken`. |
+| `POST` | `/auth/register` | — | `{ email, password, role? }` | Registro. Devuelve el usuario creado (sin `passwordHash`). |
+| `POST` | `/auth/login` | — | `{ email, password }` | Login. Devuelve `user`, `accessToken` y `refreshToken`. |
+| `POST` | `/auth/refresh` | — | `{ refreshToken }` | Valida el refresh token y devuelve un nuevo `accessToken`. |
 | `GET` | `/auth/me` | ✅ | — | Datos del usuario autenticado. |
+| `POST` | `/auth/logout` | ✅ | — | Cierra la sesión. El cliente debe descartar sus tokens. |
 
 ## Cursos
 
-| Método | Ruta | Auth | Body | Descripción |
+| Método | Ruta | Autenticación | Datos de entrada | Descripción |
 | :--- | :--- | :---: | :--- | :--- |
 | `GET` | `/courses` | — | — | Lista de cursos. |
 | `GET` | `/courses/:id` | — | — | Detalle de un curso. |
@@ -49,14 +50,14 @@ Roles: `admin`, `profesor`, `estudiante`.
 
 ## Asignaturas
 
-| Método | Ruta | Auth | Body | Descripción |
+| Método | Ruta | Autenticación | Datos de entrada | Descripción |
 | :--- | :--- | :---: | :--- | :--- |
 | `GET` | `/courses/:courseId/subjects` | — | — | Asignaturas de un curso. |
 | `POST` | `/subjects` | 🔒 admin/profesor | `{ courseId, title, order? }` | Crea una asignatura. |
 
 ## Lecciones
 
-| Método | Ruta | Auth | Body | Descripción |
+| Método | Ruta | Autenticación | Datos de entrada | Descripción |
 | :--- | :--- | :---: | :--- | :--- |
 | `GET` | `/subjects/:subjectId/lessons` | — | — | Lecciones de una asignatura. |
 | `POST` | `/lessons` | 🔒 admin/profesor | `{ subjectId, title, contentType?, contentUrl?, order? }` | Crea una lección. |
@@ -65,7 +66,7 @@ Roles: `admin`, `profesor`, `estudiante`.
 
 ## Tareas y entregas
 
-| Método | Ruta | Auth | Body | Descripción |
+| Método | Ruta | Autenticación | Datos de entrada | Descripción |
 | :--- | :--- | :---: | :--- | :--- |
 | `GET` | `/subjects/:subjectId/assignments` | — | — | Tareas de una asignatura. |
 | `POST` | `/assignments` | 🔒 admin/profesor | `{ subjectId, title, description?, dueDate?, maxFiles? }` | Crea una tarea. |
@@ -75,13 +76,13 @@ Roles: `admin`, `profesor`, `estudiante`.
 
 ## Archivos
 
-| Método | Ruta | Auth | Body | Descripción |
+| Método | Ruta | Autenticación | Datos de entrada | Descripción |
 | :--- | :--- | :---: | :--- | :--- |
 | `POST` | `/upload` | ✅ | `multipart/form-data` (`file`) | Sube un archivo. |
 
 ## Grabaciones
 
-| Método | Ruta | Auth | Body | Descripción |
+| Método | Ruta | Autenticación | Datos de entrada | Descripción |
 | :--- | :--- | :---: | :--- | :--- |
 | `GET` | `/subjects/:subjectId/recordings` | — | — | Grabaciones de una asignatura. |
 | `POST` | `/recordings` | 🔒 admin/profesor | `{ subjectId, url }` | Registra una grabación. |

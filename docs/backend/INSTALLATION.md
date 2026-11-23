@@ -16,8 +16,8 @@ npm -v
 ## 2. Clonar el repositorio
 
 ```bash
-git clone https://github.com/Lucherpar/Kursa_Backend.git
-cd Kursa_Backend
+git clone https://github.com/Vicente1DAW/Kursa.git
+cd Kursa/apps/backend
 ```
 
 ## 3. Instalar dependencias
@@ -94,13 +94,13 @@ npm run build
 npm start
 ```
 
-## 9. Ejecutar los tests
+## 9. Ejecutar las pruebas
 
 ```bash
-npm run test
+npm runa prueba
 ```
 
-Obligatorio según [QUALITY.md](QUALITY.md).
+Obligatorio según [política de calidad común](../CALIDAD.md).
 
 ## 10. Solución de problemas
 
@@ -112,6 +112,6 @@ Obligatorio según [QUALITY.md](QUALITY.md).
 | CORS bloqueado | `CORS_ORIGIN` no coincide con el frontend. | Ajusta `CORS_ORIGIN`/`SOCKET_ORIGIN`. |
 | Socket no conecta | URL u origen incorrectos. | Revisa `SOCKET_ORIGIN` y la `VITE_SOCKET_URL` del frontend. |
 
-## 11. Repositorio hermano
+## 11. Otra aplicación
 
-El frontend se instala por separado: [Kursa Frontend](https://github.com/Lucherpar/Kursa_Frontend).
+El [frontend](../frontend/README.md) está en `apps/frontend` dentro de este monorepo.
