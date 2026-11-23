@@ -1,12 +1,14 @@
-# Kursa documentation
+# Documentación de Kursa
 
-This folder is the source of truth for guidance shared by the frontend and backend.
+Toda la documentación del proyecto está reunida aquí y organizada por aplicación.
 
-- [Contributing](CONTRIBUTING.md): branches, commits and pull requests.
-- [Quality](QUALITY.md): checks required for both apps and app-specific rules.
-- [Deployment](DEPLOYMENT.md): production services, CI and environment variable names.
+## Guías comunes
 
-Technical documentation stays with the app it describes:
+- [Contribución](CONTRIBUCION.md): ramas, commits y solicitudes de cambios.
+- [Calidad](CALIDAD.md): comprobaciones y requisitos para ambas aplicaciones.
+- [Despliegue](DESPLIEGUE.md): servicios de producción, CI y variables de entorno.
 
-- [Frontend docs](../apps/frontend/docs/README.md)
-- [Backend docs](../apps/backend/docs/README.md)
+## Aplicaciones
+
+- [Frontend](frontend/README.md): descripción e índice de la documentación técnica del frontend.
+- [Backend](backend/README.md): descripción e índice de la documentación técnica del backend.
