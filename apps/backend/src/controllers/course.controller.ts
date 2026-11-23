@@ -4,6 +4,7 @@ import { successResponse, errorResponse } from "../utils/response";
 import { HTTP_STATUS } from "../utils/constants";
 import { courseSchema, subjectSchema, lessonSchema } from "../types/schemas";
 import { AuthenticatedRequest } from "../types";
+import { parseRouteId } from "../utils/parse-route-id";
 
 export const courseController = {
   async create(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -27,7 +28,7 @@ export const courseController = {
 
   async getById(req: Request, res: Response): Promise<void> {
     try {
-      const course = await courseService.getById(parseInt(req.params.id));
+      const course = await courseService.getById(parseRouteId(req.params.id));
       if (!course) {
         res.status(HTTP_STATUS.NOT_FOUND).json(errorResponse("Curso no encontrado"));
         return;
@@ -40,7 +41,7 @@ export const courseController = {
 
   async enroll(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      const courseId = parseInt(req.params.courseId);
+      const courseId = parseRouteId(req.params.courseId);
       const enrollment = await enrollmentService.enroll(req.user!.userId, courseId);
       res.status(HTTP_STATUS.CREATED).json(successResponse(enrollment, "Inscripción exitosa"));
     } catch (error: any) {
@@ -50,7 +51,7 @@ export const courseController = {
 
   async isEnrolled(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      const courseId = parseInt(req.params.courseId);
+      const courseId = parseRouteId(req.params.courseId);
       const enrolled = await enrollmentService.isEnrolled(req.user!.userId, courseId);
       res.json(successResponse({ enrolled }));
     } catch (error: any) {
@@ -72,7 +73,7 @@ export const subjectController = {
 
   async listByCourse(req: Request, res: Response): Promise<void> {
     try {
-      const subjects = await subjectService.listByCourse(parseInt(req.params.courseId));
+      const subjects = await subjectService.listByCourse(parseRouteId(req.params.courseId));
       res.json(successResponse(subjects));
     } catch (error: any) {
       res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(errorResponse(error.message));
@@ -93,7 +94,7 @@ export const lessonController = {
 
   async listBySubject(req: Request, res: Response): Promise<void> {
     try {
-      const lessons = await lessonService.listBySubject(parseInt(req.params.subjectId));
+      const lessons = await lessonService.listBySubject(parseRouteId(req.params.subjectId));
       res.json(successResponse(lessons));
     } catch (error: any) {
       res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(errorResponse(error.message));
