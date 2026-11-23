@@ -10,6 +10,8 @@ El frontend y el backend son servicios de producción independientes que se cons
 
 Los workflows están en `.github/workflows/`. Cada uno corresponde a una aplicación. Guarda el ID y el token del proyecto Vercel, el deploy hook de Render y la conexión a la base de datos como secretos de GitHub Actions. No guardes sus valores en el repositorio.
 
+Los despliegues quedan pausados mientras la variable de repositorio `ENABLE_PRODUCTION_DEPLOYMENTS` no sea `true`. Actívala solo cuando Vercel, Render y los secretos del nuevo repositorio estén configurados y revisados.
+
 ## Nombres de variables de entorno
 
 Configura los valores de producción en el proveedor correspondiente. Aquí solo se indican sus nombres.
