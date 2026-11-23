@@ -10,7 +10,7 @@
 
 API REST y servidor de tiempo real de **Kursa**, una plataforma educativa inspirada en Aules para la gestión de cursos, asignaturas, lecciones, tareas, entregas y videollamadas.
 
-> **Repositorio hermano:** [Kursa Frontend](https://github.com/Lucherpar/Kursa_Frontend) · **Documentación:** [docs/](docs/README.md)
+> Documentación específica: [docs/](docs/README.md) · Aplicación complementaria: [frontend](../frontend/README.md)
 
 ---
 
@@ -95,8 +95,8 @@ El detalle completo está en [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/Lucherpar/Kursa_Backend.git
-cd Kursa_Backend
+git clone https://github.com/Vicente1DAW/Kursa.git
+cd Kursa/apps/backend
 
 # 2. Instalar dependencias
 npm ci
@@ -137,7 +137,7 @@ La API quedará disponible en `http://localhost:4000/api`.
 ## Estructura del proyecto
 
 ```
-Kursa_Backend/
+apps/backend/
 ├── drizzle/
 │   └── schema.ts              # Esquema de tablas y enums
 ├── src/
@@ -207,7 +207,7 @@ La referencia completa está en [docs/API.md](docs/API.md).
 
 ## Calidad y pruebas
 
-Este repositorio aplica una política de calidad obligatoria descrita en **[docs/QUALITY.md](docs/QUALITY.md)**. Como mínimo, cualquier cambio debe superar:
+Este repositorio aplica una política de calidad obligatoria descrita en **[../../docs/QUALITY.md](../../docs/QUALITY.md)**. Como mínimo, cualquier cambio debe superar:
 
 ```bash
 npm run test     # obligatorio
@@ -218,42 +218,9 @@ Actualmente la suite incluye tests de autenticación (servicio, controlador, JWT
 
 ---
 
-## Despliegue y CI/CD
+## Despliegue
 
-Kursa utiliza **GitHub Actions** para integración continua y **Vercel** para el despliegue en la nube.
-
-### Flujo de despliegue
-
-1. Un desarrollador abre un **PR de su rama `feature/...` a `develop`**.
-2. Un compañero revisa y aprueba la PR; se hace merge a `develop`.
-3. Cuando hay una versión lista para producción, se abre un **PR de `develop` a `main`**.
-4. Al hacer merge a `main`, se dispara el pipeline de GitHub Actions:
-
-   - **Backend**: `npm ci` → `npm test` → `npm run db:push` (aplica cambios de esquema a **Neon producción** `kursa-prod`) → `npm run build` → `vercel deploy --prod`.
-   - **Frontend**: `npm ci` → `npm test` → `npm run build` → `vercel deploy --prod`.
-
-5. Si los **tests fallan**, el despliegue no se ejecuta.
-6. Las URLs de producción se asignan automáticamente por Vercel en el primer despliegue.
-
-### Variables de entorno de producción
-
-Nunca subas `.env` a git. Configura en el dashboard de Vercel (Settings → Environment Variables):
-
-- **Backend**: `DATABASE_URL` (Neon prod), `JWT_SECRET`, `REFRESH_TOKEN_SECRET`, `CORS_ORIGIN`, `SOCKET_ORIGIN`, `PORT`.
-- **Frontend**: `VITE_API_URL`, `VITE_SOCKET_URL`.
-
-### Secrets de GitHub Actions
-
-Cada repositorio necesita estos secretos (Settings → Secrets and variables → Actions):
-
-| Secreto | Backend | Frontend |
-| :--- | :--- | :--- |
-| `VERCEL_TOKEN` | Token de Vercel | mismo token |
-| `VERCEL_PROJECT_ID` | `prj_4Q4jJRJwFtEHr5JVVFTO1JD5pg8X` | `prj_RODwVnDv2nrUb2KtJ45ubc9SwvmF` |
-| `VERCEL_ORG_ID` | `team_P0gukamYQ8ZDze44OZJX99kM` | `team_P0gukamYQ8ZDze44OZJX99kM` |
-| `DATABASE_URL` | Cadena de conexión Neon producción | — |
-
-Obtén `VERCEL_TOKEN` con `vercel login` o desde https://vercel.com/account/tokens.
+El servicio de producción se ejecuta en Render. El flujo de CI/CD, las variables de entorno y el proceso de despliegue están en la [guía compartida](../../docs/DEPLOYMENT.md).
 
 ---
 
@@ -278,11 +245,11 @@ Obtén `VERCEL_TOKEN` con `vercel login` o desde https://vercel.com/account/toke
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Arquitectura y flujo de datos. |
 | [docs/API.md](docs/API.md) | Referencia de endpoints y WebSocket. |
 | [docs/DATABASE.md](docs/DATABASE.md) | Modelo de datos. |
-| [docs/QUALITY.md](docs/QUALITY.md) | Política de calidad (obligatoria). |
-| [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Flujo de trabajo y convenciones. |
+| [../../docs/QUALITY.md](../../docs/QUALITY.md) | Política de calidad (obligatoria). |
+| [../../docs/CONTRIBUTING.md](../../docs/CONTRIBUTING.md) | Contribución y flujo de PR. |
 
 ---
 
 ## Licencia
 
-Este proyecto se distribuye bajo licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) si está disponible en el repositorio.
+Este proyecto se distribuye bajo licencia **MIT**.

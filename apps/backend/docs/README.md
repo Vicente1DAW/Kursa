@@ -9,7 +9,5 @@
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Capas, flujo de datos y decisiones de diseño. | Dev |
 | [API.md](API.md) | Endpoints REST y eventos Socket.IO. | Dev / Frontend |
 | [DATABASE.md](DATABASE.md) | Tablas, relaciones y esquema Drizzle. | Dev / DBA |
-| [QUALITY.md](QUALITY.md) | **Política de calidad obligatoria.** | Todos |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Ramas, commits, PRs y Definition of Done. | Todos |
 
-> Repositorio hermano: [Kursa Frontend](https://github.com/Lucherpar/Kursa_Frontend)
+Las normas compartidas de contribución, calidad y despliegue están en el [índice general](../../../docs/README.md).
