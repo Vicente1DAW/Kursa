@@ -28,7 +28,7 @@ jobs:
 
   backend-deploy:
     needs: backend-checks
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && vars.ENABLE_PRODUCTION_DEPLOYMENTS == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
