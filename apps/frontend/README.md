@@ -10,7 +10,7 @@
 
 Cliente web de **Kursa**, una plataforma educativa inspirada en Aules para gestionar cursos, asignaturas, lecciones, tareas, entregas y videollamadas.
 
-> **Repositorio hermano:** [Kursa Backend](https://github.com/Lucherpar/Kursa_Backend) · **Documentación:** [docs/](docs/README.md)
+> **Aplicación complementaria:** [backend](../backend/README.md) · **Documentación:** [docs/](docs/README.md)
 
 ---
 
@@ -34,7 +34,7 @@ Cliente web de **Kursa**, una plataforma educativa inspirada en Aules para gesti
 
 ## Descripción
 
-Kursa Frontend es una **Single Page Application** construida con React y Vite que consume la API REST y el canal WebSocket del [backend](https://github.com/Lucherpar/Kursa_Backend).
+Kursa Frontend es una **Single Page Application** construida con React y Vite que consume la API REST y el canal WebSocket del [backend](https://github.com/Vicente1DAW/Kursa.git).
 
 Funcionalidades principales:
 
@@ -100,8 +100,8 @@ El detalle completo está en [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) y [doc
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/Lucherpar/Kursa_Frontend.git
-cd Kursa_Frontend
+git clone https://github.com/Vicente1DAW/Kursa.git
+cd Kursa/apps/frontend
 
 # 2. Instalar dependencias
 npm ci
@@ -137,7 +137,7 @@ La aplicación quedará disponible en `http://localhost:5173`.
 ## Estructura del proyecto
 
 ```
-Kursa_Frontend/
+apps/frontend/
 ├── src/
 │   ├── components/
 │   │   ├── common/            # LessonCard, DropzoneZone
@@ -195,7 +195,7 @@ Detalle completo en [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md).
 
 ## Calidad y pruebas
 
-Este repositorio aplica una política de calidad obligatoria descrita en **[docs/QUALITY.md](docs/QUALITY.md)**. Como mínimo, cualquier cambio debe superar:
+Este repositorio aplica una política de calidad obligatoria descrita en **[../../docs/QUALITY.md](../../docs/QUALITY.md)**. Como mínimo, cualquier cambio debe superar:
 
 ```bash
 npm run test     # obligatorio
@@ -207,42 +207,9 @@ La suite incluye tests de utilidades, esquemas Zod y componentes de UI.
 
 ---
 
-## Despliegue y CI/CD
+## Despliegue
 
-Kursa utiliza **GitHub Actions** para integración continua y **Vercel** para el despliegue en la nube.
-
-### Flujo de despliegue
-
-1. Un desarrollador abre un **PR de su rama `feature/...` a `develop`**.
-2. Un compañero revisa y aprueba la PR; se hace merge a `develop`.
-3. Cuando hay una versión lista para producción, se abre un **PR de `develop` a `main`**.
-4. Al hacer merge a `main`, se dispara el pipeline de GitHub Actions:
-
-   - **Backend**: `npm ci` → `npm test` → `npm run db:push` (aplica cambios de esquema a **Neon producción** `kursa-prod`) → `npm run build` → `vercel deploy --prod`.
-   - **Frontend**: `npm ci` → `npm test` → `npm run build` → `vercel deploy --prod`.
-
-5. Si los **tests fallan**, el despliegue no se ejecuta.
-6. Las URLs de producción se asignan automáticamente por Vercel en el primer despliegue.
-
-### Variables de entorno de producción
-
-Nunca subas `.env` a git. Configura en el dashboard de Vercel (Settings → Environment Variables):
-
-- **Backend**: `DATABASE_URL` (Neon prod), `JWT_SECRET`, `REFRESH_TOKEN_SECRET`, `CORS_ORIGIN`, `SOCKET_ORIGIN`, `PORT`.
-- **Frontend**: `VITE_API_URL`, `VITE_SOCKET_URL`.
-
-### Secrets de GitHub Actions
-
-Cada repositorio necesita estos secretos (Settings → Secrets and variables → Actions):
-
-| Secreto | Backend | Frontend |
-| :--- | :--- | :--- |
-| `VERCEL_TOKEN` | Token de Vercel | mismo token |
-| `VERCEL_PROJECT_ID` | `prj_4Q4jJRJwFtEHr5JVVFTO1JD5pg8X` | `prj_RODwVnDv2nrUb2KtJ45ubc9SwvmF` |
-| `VERCEL_ORG_ID` | `team_P0gukamYQ8ZDze44OZJX99kM` | `team_P0gukamYQ8ZDze44OZJX99kM` |
-| `DATABASE_URL` | Cadena de conexión Neon producción | — |
-
-Obtén `VERCEL_TOKEN` con `vercel login` o desde https://vercel.com/account/tokens.
+El frontend de producción se despliega en Vercel. Consulta la [guía compartida](../../docs/DEPLOYMENT.md).
 
 ---
 
@@ -266,11 +233,11 @@ Obtén `VERCEL_TOKEN` con `vercel login` o desde https://vercel.com/account/toke
 | [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) | Variables de entorno. |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Arquitectura y flujo de datos. |
 | [docs/FRONTEND.md](docs/FRONTEND.md) | Rutas, componentes, hooks y estado. |
-| [docs/QUALITY.md](docs/QUALITY.md) | Política de calidad (obligatoria). |
-| [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Flujo de trabajo y convenciones. |
+| [../../docs/QUALITY.md](../../docs/QUALITY.md) | Política de calidad (obligatoria). |
+| [../../docs/CONTRIBUTING.md](../../docs/CONTRIBUTING.md) | Contribución y flujo de PR. |
 
 ---
 
 ## Licencia
 
-Este proyecto se distribuye bajo licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) si está disponible en el repositorio.
+Este proyecto se distribuye bajo licencia **MIT**.

@@ -2,7 +2,7 @@
 
 ## 1. Visión general
 
-Kursa Frontend es una **SPA** con React 18 y Vite que consume la API REST y el canal WebSocket del [backend](https://github.com/Lucherpar/Kursa_Backend).
+Kursa Frontend es una **SPA** con React 18 y Vite que consume la API REST y el canal WebSocket del [backend](../../backend/README.md).
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -87,4 +87,4 @@ Detalle en [FRONTEND.md](FRONTEND.md).
 
 ## 10. Documentos relacionados
 
-- [FRONTEND.md](FRONTEND.md) · [QUALITY.md](QUALITY.md) · [INSTALLATION.md](INSTALLATION.md)
+- [FRONTEND.md](FRONTEND.md) · [política de calidad](../../../docs/QUALITY.md) · [INSTALLATION.md](INSTALLATION.md)

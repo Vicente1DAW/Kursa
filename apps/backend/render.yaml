@@ -2,6 +2,7 @@ services:
   - type: web
     name: kursa-backend
     env: node
+    rootDir: apps/backend
     region: oregon
     buildCommand: npm ci && npm run build
     startCommand: npm start
@@ -27,4 +28,4 @@ services:
       - key: MAX_FILE_SIZE
         value: 10485760
     healthCheckPath: /api/courses
-    autoDeploy: true
+    autoDeploy: false

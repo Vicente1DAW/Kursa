@@ -21,7 +21,7 @@ VITE_SOCKET_URL=http://localhost:4000
 | Entorno | `VITE_API_URL` | Dónde se configura |
 | :--- | :--- | :--- |
 | Desarrollo | `http://localhost:4000/api` | `.env` local |
-| Producción | URL pública del backend | Panel del proveedor (Vercel/Netlify, etc.) |
+| Producción | URL pública del backend | Variables de entorno del proyecto Vercel |
 
 ## Notas
 
