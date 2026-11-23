@@ -1,13 +1,14 @@
 name: Backend CI/CD
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main, develop]
+    branches: [main, develop, hotfix]
     paths:
       - 'apps/backend/**'
       - '.github/workflows/backend.yml'
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, hotfix]
 
 jobs:
   backend-checks:
@@ -28,7 +29,10 @@ jobs:
 
   backend-deploy:
     needs: backend-checks
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && vars.ENABLE_PRODUCTION_DEPLOYMENTS == 'true'
+    if: >-
+      (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/hotfix') &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
+      vars.ENABLE_PRODUCTION_DEPLOYMENTS == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
