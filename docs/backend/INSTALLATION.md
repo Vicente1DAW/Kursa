@@ -94,13 +94,13 @@ npm run build
 npm start
 ```
 
-## 9. Ejecutar los tests
+## 9. Ejecutar las pruebas
 
 ```bash
-npm run test
+npm runa prueba
 ```
 
-Obligatorio según la [política de calidad común](../../../docs/QUALITY.md).
+Obligatorio según [política de calidad común](../CALIDAD.md).
 
 ## 10. Solución de problemas
 
@@ -114,4 +114,4 @@ Obligatorio según la [política de calidad común](../../../docs/QUALITY.md).
 
 ## 11. Otra aplicación
 
-El [frontend](../../frontend/README.md) está en `apps/frontend` dentro de este monorepo.
+El [frontend](../frontend/README.md) está en `apps/frontend` dentro de este monorepo.

@@ -45,7 +45,7 @@ UPLOAD_DIR=/tmp/uploads
 | Entorno | Base de datos | Dónde se configura |
 | :--- | :--- | :--- |
 | Desarrollo | `kursa-dev` | `.env` local |
-| Producción | `kursa-prod` | Variables de entorno del servicio Render |
+| Producción | `kursa-prod` | Panel del proveedor (Vercel/Railway/Render, etc.) |
 
 ## Buenas prácticas
 

@@ -4,7 +4,7 @@
 
 - **Node.js 20+** y **npm 10+**
 - **Git**
-- El **backend** de Kursa en ejecución (ver [Kursa Backend](../../backend/README.md)).
+- El **backend** de Kursa en ejecución (ver [backend](../backend/README.md)).
 
 Comprueba las versiones:
 
@@ -62,14 +62,14 @@ npm run preview   # sirve el resultado localmente
 
 El contenido de `dist/` puede desplegarse en cualquier hosting estático (Vercel, Netlify, etc.).
 
-## 7. Ejecutar los tests
+## 7. Ejecutar las pruebas
 
 ```bash
-npm run test
-npm run test:coverage   # opcional
+npm runa prueba
+npm runa prueba:coverage   # opcional
 ```
 
-Obligatorio según la [política de calidad común](../../../docs/QUALITY.md).
+Obligatorio según [política de calidad común](../CALIDAD.md).
 
 ## 8. Comprobar el lint
 
@@ -81,7 +81,7 @@ npm run lint
 
 | Problema | Causa probable | Solución |
 | :--- | :--- | :--- |
-| `npm run build` falla con errores de tipos | Cambios sin tipar o imports rotos. | Revisa la salida de `tsc`; ejecuta `npm run test`. |
+| `npm run build` falla con errores de tipos | Cambios sin tipar o imports rotos. | Revisa la salida de `tsc`; ejecuta `npm runa prueba`. |
 | Peticiones `ERR_CONNECTION_REFUSED` | El backend no está corriendo. | Arranca el backend en `http://localhost:4000`. |
 | Error de CORS | `CORS_ORIGIN` del backend no coincide. | Ajusta `CORS_ORIGIN`/`SOCKET_ORIGIN` en el backend. |
 | Socket no conecta | `VITE_SOCKET_URL` incorrecta. | Revisa `.env` y reinicia Vite. |
@@ -89,4 +89,4 @@ npm run lint
 
 ## 10. Otra aplicación
 
-El [backend](../../backend/README.md) está en `apps/backend` dentro de este monorepo.
+El [backend](../backend/README.md) está en `apps/backend` dentro de este monorepo.
