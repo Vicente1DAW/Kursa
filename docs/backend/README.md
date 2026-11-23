@@ -6,18 +6,18 @@
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?logo=typescript&logoColor=white)
 ![Express](https://img.shields.io/badge/express-4.x-000000?logo=express&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/postgresql-Neon-4169E1?logo=postgresql&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-vitest-6E9F18?logo=vitest&logoColor=white)
+![Pruebas](https://img.shields.io/badge/pruebas-vitest-6E9F18?logo=vitest&logoColor=white)
 
 API REST y servidor de tiempo real de **Kursa**, una plataforma educativa inspirada en Aules para la gestión de cursos, asignaturas, lecciones, tareas, entregas y videollamadas.
 
-> **Repositorio hermano:** [Kursa Frontend](https://github.com/Lucherpar/Kursa_Frontend) · **Documentación:** [docs/](docs/README.md)
+> **Aplicación complementaria:** [frontend](../frontend/README.md) · **Documentación:** [índice](INDICE.md)
 
 ---
 
 ## Tabla de contenidos
 
 - [Descripción](#descripción)
-- [Stack tecnológico](#stack-tecnológico)
+- [Tecnologías](#tecnologías)
 - [Arquitectura](#arquitectura)
 - [Requisitos](#requisitos)
 - [Instalación rápida](#instalación-rápida)
@@ -48,7 +48,7 @@ El proyecto **no utiliza inteligencia artificial**: toda la lógica es determini
 
 ---
 
-## Stack tecnológico
+## Tecnologías
 
 | Área | Tecnología |
 | :--- | :--- |
@@ -80,7 +80,7 @@ routes → middleware → controllers → services → db (Drizzle) → PostgreS
 - **services**: lógica de negocio y acceso a datos.
 - **db**: pool de conexiones y esquema Drizzle.
 
-El detalle completo está en [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+El detalle completo está en [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---
 
@@ -95,8 +95,8 @@ El detalle completo está en [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/Lucherpar/Kursa_Backend.git
-cd Kursa_Backend
+git clone https://../frontend/README.md
+cd Kursa/apps/backend
 
 # 2. Instalar dependencias
 npm ci
@@ -114,7 +114,7 @@ npm run dev
 
 La API quedará disponible en `http://localhost:4000/api`.
 
-> Guía detallada (incluida la creación de la base de datos en Neon): [docs/INSTALLATION.md](docs/INSTALLATION.md)
+> Guía detallada (incluida la creación de la base de datos en Neon): [INSTALLATION.md](INSTALLATION.md)
 
 ---
 
@@ -125,8 +125,8 @@ La API quedará disponible en `http://localhost:4000/api`.
 | `npm run dev` | Inicia el servidor en modo desarrollo con `ts-node`. |
 | `npm run build` | Compila TypeScript a `dist/`. |
 | `npm start` | Ejecuta la versión compilada (`dist/src/app.js`). |
-| `npm run test` | Ejecuta la suite de tests con Vitest. |
-| `npm run test:watch` | Ejecuta los tests en modo vigilancia. |
+| `npm runa prueba` | Ejecuta la suite de pruebas con Vitest. |
+| `npm runa prueba:watch` | Ejecuta las pruebas en modo vigilancia. |
 | `npm run db:generate` | Genera migraciones SQL a partir del esquema Drizzle. |
 | `npm run db:push` | Sincroniza el esquema directamente con la base de datos. |
 | `npm run db:migrate` | Aplica las migraciones generadas. |
@@ -137,7 +137,7 @@ La API quedará disponible en `http://localhost:4000/api`.
 ## Estructura del proyecto
 
 ```
-Kursa_Backend/
+apps/backend/
 ├── drizzle/
 │   └── schema.ts              # Esquema de tablas y enums
 ├── src/
@@ -173,7 +173,7 @@ Kursa_Backend/
 | `MAX_FILE_SIZE` | ❌ | `10485760` | Tamaño máximo de archivo (bytes). |
 | `UPLOAD_DIR` | ❌ | `/tmp/uploads` | Directorio de subidas. |
 
-Detalle completo en [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md).
+Detalle completo en [ENVIRONMENT.md](ENVIRONMENT.md).
 
 ---
 
@@ -187,7 +187,7 @@ La API está versionada bajo el prefijo `/api`. Todas las respuestas siguen el f
 
 Endpoints principales:
 
-| Método | Ruta | Auth | Descripción |
+| Método | Ruta | Autenticación | Descripción |
 | :--- | :--- | :---: | :--- |
 | `POST` | `/api/auth/register` | — | Registro de usuario. |
 | `POST` | `/api/auth/login` | — | Inicio de sesión. |
@@ -201,59 +201,26 @@ Endpoints principales:
 | `POST` | `/api/assignments/:assignmentId/submit` | ✅ | Entrega de tarea con archivos. |
 | `PATCH` | `/api/submissions/:submissionId/grade` | 🔒 admin/profesor | Califica una entrega. |
 
-La referencia completa está en [docs/API.md](docs/API.md).
+La referencia completa está en [API.md](API.md).
 
 ---
 
 ## Calidad y pruebas
 
-Este repositorio aplica una política de calidad obligatoria descrita en **[docs/QUALITY.md](docs/QUALITY.md)**. Como mínimo, cualquier cambio debe superar:
+Este repositorio aplica una política de calidad obligatoria descrita en **[../CALIDAD.md](../CALIDAD.md)**. Como mínimo, cualquier cambio debe superar:
 
 ```bash
-npm run test     # obligatorio
+npm runa prueba     # obligatorio
 npm run build    # obligatorio
 ```
 
-Actualmente la suite incluye tests de autenticación (servicio, controlador, JWT y middleware), esquemas Zod, helpers de respuesta y constantes.
+Actualmente la suite incluye pruebas de autenticación (servicio, controlador, JWT y middleware), esquemas Zod, helpers de respuesta y constantes.
 
 ---
 
-## Despliegue y CI/CD
+## Despliegue
 
-Kursa utiliza **GitHub Actions** para integración continua y **Vercel** para el despliegue en la nube.
-
-### Flujo de despliegue
-
-1. Un desarrollador abre un **PR de su rama `feature/...` a `develop`**.
-2. Un compañero revisa y aprueba la PR; se hace merge a `develop`.
-3. Cuando hay una versión lista para producción, se abre un **PR de `develop` a `main`**.
-4. Al hacer merge a `main`, se dispara el pipeline de GitHub Actions:
-
-   - **Backend**: `npm ci` → `npm test` → `npm run db:push` (aplica cambios de esquema a **Neon producción** `kursa-prod`) → `npm run build` → `vercel deploy --prod`.
-   - **Frontend**: `npm ci` → `npm test` → `npm run build` → `vercel deploy --prod`.
-
-5. Si los **tests fallan**, el despliegue no se ejecuta.
-6. Las URLs de producción se asignan automáticamente por Vercel en el primer despliegue.
-
-### Variables de entorno de producción
-
-Nunca subas `.env` a git. Configura en el dashboard de Vercel (Settings → Environment Variables):
-
-- **Backend**: `DATABASE_URL` (Neon prod), `JWT_SECRET`, `REFRESH_TOKEN_SECRET`, `CORS_ORIGIN`, `SOCKET_ORIGIN`, `PORT`.
-- **Frontend**: `VITE_API_URL`, `VITE_SOCKET_URL`.
-
-### Secrets de GitHub Actions
-
-Cada repositorio necesita estos secretos (Settings → Secrets and variables → Actions):
-
-| Secreto | Backend | Frontend |
-| :--- | :--- | :--- |
-| `VERCEL_TOKEN` | Token de Vercel | mismo token |
-| `VERCEL_PROJECT_ID` | `prj_4Q4jJRJwFtEHr5JVVFTO1JD5pg8X` | `prj_RODwVnDv2nrUb2KtJ45ubc9SwvmF` |
-| `VERCEL_ORG_ID` | `team_P0gukamYQ8ZDze44OZJX99kM` | `team_P0gukamYQ8ZDze44OZJX99kM` |
-| `DATABASE_URL` | Cadena de conexión Neon producción | — |
-
-Obtén `VERCEL_TOKEN` con `vercel login` o desde https://vercel.com/account/tokens.
+El servicio de producción se ejecuta en Render. Consulta la [guía compartida](../DESPLIEGUE.md).
 
 ---
 
@@ -261,28 +228,19 @@ Obtén `VERCEL_TOKEN` con `vercel login` o desde https://vercel.com/account/toke
 
 | Integrante | Rol | GitHub |
 | :--- | :--- | :--- |
-| Salvador Gómez Sánchez | Product Owner & Developer | [@Salvags92](https://github.com/Salvags92) |
-| Lucas Hernández Pardo | Scrum Master & Developer | [@Lucherpar](https://github.com/Lucherpar) |
-| Vicente Pérez Javier | Developer | [@Vicente1DAW](https://github.com/Vicente1DAW) |
-| Alicia del Carmen Ros Villalba | Developer | [@cocodepiel](https://github.com/cocodepiel) |
+| Salvador Gómez Sánchez | Responsable de producto y desarrollador | [@Salvags92](https://github.com/Salvags92) |
+| Lucas Hernández Pardo | Facilitador Scrum y desarrollador | [@Lucherpar](https://github.com/Lucherpar) |
+| Vicente Pérez Javier | Desarrollador | [@Vicente1DAW](https://github.com/Vicente1DAW) |
+| Alicia del Carmen Ros Villalba | Desarrollador | [@cocodepiel](https://github.com/cocodepiel) |
 
 ---
 
-## Documentación
+## Índice de documentación
 
-| Documento | Contenido |
-| :--- | :--- |
-| [docs/README.md](docs/README.md) | Índice de la documentación. |
-| [docs/INSTALLATION.md](docs/INSTALLATION.md) | Instalación y configuración paso a paso. |
-| [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) | Variables de entorno. |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Arquitectura y flujo de datos. |
-| [docs/API.md](docs/API.md) | Referencia de endpoints y WebSocket. |
-| [docs/DATABASE.md](docs/DATABASE.md) | Modelo de datos. |
-| [docs/QUALITY.md](docs/QUALITY.md) | Política de calidad (obligatoria). |
-| [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Flujo de trabajo y convenciones. |
+Consulta [INDICE.md](INDICE.md) para acceder a las guías técnicas.
 
 ---
 
 ## Licencia
 
-Este proyecto se distribuye bajo licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) si está disponible en el repositorio.
+Este proyecto se distribuye bajo licencia **MIT**.

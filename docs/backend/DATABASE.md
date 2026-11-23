@@ -13,9 +13,9 @@ subjects ──< recordings
 users ──< files
 ```
 
-## Enum
+## Enumeración
 
-| Enum | Valores |
+| Enumeración | Valores |
 | :--- | :--- |
 | `user_role` | `admin`, `profesor`, `estudiante` |
 

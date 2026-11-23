@@ -6,18 +6,18 @@
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/vite-5.x-646CFF?logo=vite&logoColor=white)
 ![Tailwind](https://img.shields.io/badge/tailwind-3.x-06B6D4?logo=tailwindcss&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-vitest-6E9F18?logo=vitest&logoColor=white)
+![Pruebas](https://img.shields.io/badge/pruebas-vitest-6E9F18?logo=vitest&logoColor=white)
 
 Cliente web de **Kursa**, una plataforma educativa inspirada en Aules para gestionar cursos, asignaturas, lecciones, tareas, entregas y videollamadas.
 
-> **Repositorio hermano:** [Kursa Backend](https://github.com/Lucherpar/Kursa_Backend) · **Documentación:** [docs/](docs/README.md)
+> **Aplicación complementaria:** [backend](../backend/README.md) · **Documentación:** [índice](INDICE.md)
 
 ---
 
 ## Tabla de contenidos
 
 - [Descripción](#descripción)
-- [Stack tecnológico](#stack-tecnológico)
+- [Tecnologías](#tecnologías)
 - [Arquitectura](#arquitectura)
 - [Requisitos](#requisitos)
 - [Instalación rápida](#instalación-rápida)
@@ -34,7 +34,7 @@ Cliente web de **Kursa**, una plataforma educativa inspirada en Aules para gesti
 
 ## Descripción
 
-Kursa Frontend es una **Single Page Application** construida con React y Vite que consume la API REST y el canal WebSocket del [backend](https://github.com/Lucherpar/Kursa_Backend).
+Kursa Frontend es una **aplicación de una sola página** construida con React y Vite que consume la API REST y el canal WebSocket del [backend](https://../backend/README.md).
 
 Funcionalidades principales:
 
@@ -45,19 +45,19 @@ Funcionalidades principales:
 - Entrega de tareas con **arrastrar y soltar** (Dropzone).
 - Calificaciones y perfil de usuario.
 - Videollamadas y chat en tiempo real (**Socket.IO**).
-- Interfaz accesible y responsive con **Tailwind CSS**.
+- Interfaz accesible y adaptable con **Tailwind CSS**.
 
 El proyecto **no utiliza inteligencia artificial**: toda la lógica es determinista y basada en reglas.
 
 ---
 
-## Stack tecnológico
+## Tecnologías
 
 | Área | Tecnología |
 | :--- | :--- |
 | Librería UI | React 18 |
 | Lenguaje | TypeScript 5 |
-| Build / dev server | Vite 5 |
+| Compilación / servidor de desarrollo | Vite 5 |
 | Estilos | Tailwind CSS 3 + `tailwindcss-animate` |
 | Componentes | Radix UI + utilidades `cva`/`clsx` |
 | Estado servidor | TanStack React Query |
@@ -85,7 +85,7 @@ pages → components → hooks → lib / store → API (Axios) / Socket.IO
 - **lib**: cliente HTTP, cliente socket, React Query y utilidades.
 - **schemas**: validaciones Zod compartidas con los formularios.
 
-El detalle completo está en [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) y [docs/FRONTEND.md](docs/FRONTEND.md).
+El detalle completo está en [ARCHITECTURE.md](ARCHITECTURE.md) y [FRONTEND.md](FRONTEND.md).
 
 ---
 
@@ -100,8 +100,8 @@ El detalle completo está en [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) y [doc
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/Lucherpar/Kursa_Frontend.git
-cd Kursa_Frontend
+git clone https://../backend/README.md
+cd Kursa/apps/frontend
 
 # 2. Instalar dependencias
 npm ci
@@ -116,7 +116,7 @@ npm run dev
 
 La aplicación quedará disponible en `http://localhost:5173`.
 
-> Guía detallada: [docs/INSTALLATION.md](docs/INSTALLATION.md)
+> Guía detallada: [INSTALLATION.md](INSTALLATION.md)
 
 ---
 
@@ -128,16 +128,16 @@ La aplicación quedará disponible en `http://localhost:5173`.
 | `npm run build` | Comprueba tipos (`tsc`) y genera el bundle de producción. |
 | `npm run preview` | Sirve el bundle de producción localmente. |
 | `npm run lint` | Ejecuta ESLint sobre `ts`/`tsx`. |
-| `npm run test` | Ejecuta la suite de tests con Vitest. |
-| `npm run test:watch` | Tests en modo vigilancia. |
-| `npm run test:coverage` | Tests con informe de cobertura. |
+| `npm runa prueba` | Ejecuta la suite de pruebas con Vitest. |
+| `npm runa prueba:watch` | Pruebas en modo vigilancia. |
+| `npm runa prueba:coverage` | Pruebas con informe de cobertura. |
 
 ---
 
 ## Estructura del proyecto
 
 ```
-Kursa_Frontend/
+apps/frontend/
 ├── src/
 │   ├── components/
 │   │   ├── common/            # LessonCard, DropzoneZone
@@ -150,7 +150,7 @@ Kursa_Frontend/
 │   ├── schemas/               # validaciones Zod
 │   ├── store/                 # AuthContext, SocketContext
 │   ├── styles/                # Tailwind + variables CSS
-│   ├── test/                  # setup de Testing Library
+│   ├── test/                  # configuración de Testing Library
 │   ├── App.tsx                # router y providers
 │   └── main.tsx               # punto de entrada
 ├── docs/                      # documentación del proyecto
@@ -189,21 +189,27 @@ Kursa_Frontend/
 | `VITE_API_URL` | ❌ | `http://localhost:4000/api` | URL base de la API REST. |
 | `VITE_SOCKET_URL` | ❌ | `http://localhost:4000` | URL del servidor Socket.IO. |
 
-Detalle completo en [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md).
+Detalle completo en [ENVIRONMENT.md](ENVIRONMENT.md).
 
 ---
 
 ## Calidad y pruebas
 
-Este repositorio aplica una política de calidad obligatoria descrita en **[docs/QUALITY.md](docs/QUALITY.md)**. Como mínimo, cualquier cambio debe superar:
+Este repositorio aplica una política de calidad obligatoria descrita en **[../CALIDAD.md](../CALIDAD.md)**. Como mínimo, cualquier cambio debe superar:
 
 ```bash
-npm run test     # obligatorio
+npm runa prueba     # obligatorio
 npm run build    # obligatorio
 npm run lint     # recomendado
 ```
 
-La suite incluye tests de utilidades, esquemas Zod y componentes de UI.
+La suite incluye pruebas de utilidades, esquemas Zod y componentes de UI.
+
+---
+
+## Despliegue
+
+El frontend de producción se despliega en Vercel. Consulta la [guía compartida](../DESPLIEGUE.md).
 
 ---
 
@@ -211,27 +217,19 @@ La suite incluye tests de utilidades, esquemas Zod y componentes de UI.
 
 | Integrante | Rol | GitHub |
 | :--- | :--- | :--- |
-| Salvador Gómez Sánchez | Product Owner & Developer | [@Salvags92](https://github.com/Salvags92) |
-| Lucas Hernández Pardo | Scrum Master & Developer | [@Lucherpar](https://github.com/Lucherpar) |
-| Vicente Pérez Javier | Developer | [@Vicente1DAW](https://github.com/Vicente1DAW) |
-| Alicia del Carmen Ros Villalba | Developer | [@cocodepiel](https://github.com/cocodepiel) |
+| Salvador Gómez Sánchez | Responsable de producto y desarrollador | [@Salvags92](https://github.com/Salvags92) |
+| Lucas Hernández Pardo | Facilitador Scrum y desarrollador | [@Lucherpar](https://github.com/Lucherpar) |
+| Vicente Pérez Javier | Desarrollador | [@Vicente1DAW](https://github.com/Vicente1DAW) |
+| Alicia del Carmen Ros Villalba | Desarrollador | [@cocodepiel](https://github.com/cocodepiel) |
 
 ---
 
-## Documentación
+## Índice de documentación
 
-| Documento | Contenido |
-| :--- | :--- |
-| [docs/README.md](docs/README.md) | Índice de la documentación. |
-| [docs/INSTALLATION.md](docs/INSTALLATION.md) | Instalación y configuración paso a paso. |
-| [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) | Variables de entorno. |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Arquitectura y flujo de datos. |
-| [docs/FRONTEND.md](docs/FRONTEND.md) | Rutas, componentes, hooks y estado. |
-| [docs/QUALITY.md](docs/QUALITY.md) | Política de calidad (obligatoria). |
-| [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Flujo de trabajo y convenciones. |
+Consulta [INDICE.md](INDICE.md) para acceder a las guías técnicas.
 
 ---
 
 ## Licencia
 
-Este proyecto se distribuye bajo licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) si está disponible en el repositorio.
+Este proyecto se distribuye bajo licencia **MIT**.

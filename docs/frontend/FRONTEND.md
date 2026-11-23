@@ -19,7 +19,7 @@ Las rutas se definen en `src/App.tsx` con React Router v6.
 | `/recordings/:subjectId` | `RecordingsPage` | Autenticado |
 | `/` | Redirección | → `/dashboard` |
 
-## 2. Providers
+## 2. Proveedores
 
 El árbol de providers en `App.tsx` es:
 
@@ -91,7 +91,8 @@ La sesión se persiste en `localStorage` (`accessToken`, `refreshToken`, `user`)
 
 - `baseURL = VITE_API_URL`.
 - Interceptor de petición: añade `Authorization: Bearer <token>`.
-- Interceptor de respuesta: ante `401`, limpia la sesión y redirige a `/login`.
+- Interceptor de respuesta: ante `401`, intenta renovar el access token con `POST /auth/refresh` (una sola vez, evitando peticiones duplicadas) y reintenta la petición original. Si el refresh falla, limpia la sesión y redirige a `/login`.
+- Al arrancar, `AuthContext` revalida la sesión con `GET /auth/me` cuando existe un token guardado.
 
 ## 7. Añadir una página nueva
 
@@ -99,7 +100,7 @@ La sesión se persiste en `localStorage` (`accessToken`, `refreshToken`, `user`)
 2. Añade la ruta en `src/App.tsx`.
 3. Si requiere datos, usa `useQuery` de React Query.
 4. Si requiere autenticación, envuélvela en `ProtectedRoute`.
-5. Añade un test si contiene lógica relevante.
+5. Añade una prueba si contiene lógica relevante.
 
 ## 8. Estilos
 

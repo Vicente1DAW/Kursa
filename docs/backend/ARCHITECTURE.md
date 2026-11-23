@@ -97,10 +97,10 @@ Eventos principales:
 | Decisión | Motivo |
 | :--- | :--- |
 | Drizzle en lugar de un ORM pesado | Ligero, tipado y compatible con entornos serverless (Neon). |
-| Zod para validación | Un único esquema tipado compartido entre controladores y tests. |
+| Zod para validación | Un único esquema tipado compartido entre controladores y pruebas. |
 | Socket.IO sobre el mismo servidor | Simplicidad de despliegue y sesión compartida. |
 | Respuestas uniformes | Facilita el consumo desde el frontend y el manejo de errores. |
 
 ## 9. Documentos relacionados
 
-- [API.md](API.md) · [DATABASE.md](DATABASE.md) · [QUALITY.md](QUALITY.md)
+- [API.md](API.md) · [DATABASE.md](DATABASE.md) · [política de calidad](../CALIDAD.md)
