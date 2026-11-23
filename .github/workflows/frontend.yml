@@ -1,13 +1,14 @@
 name: Frontend CI/CD
 
 on:
+  workflow_dispatch:
   push:
-    branches: [main, develop]
+    branches: [main, develop, hotfix]
     paths:
       - 'apps/frontend/**'
       - '.github/workflows/frontend.yml'
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, hotfix]
 
 jobs:
   frontend-checks:
@@ -29,7 +30,10 @@ jobs:
 
   frontend-deploy:
     needs: frontend-checks
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && vars.ENABLE_PRODUCTION_DEPLOYMENTS == 'true'
+    if: >-
+      (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/hotfix') &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
+      vars.ENABLE_PRODUCTION_DEPLOYMENTS == 'true'
     runs-on: ubuntu-latest
     defaults:
       run:
