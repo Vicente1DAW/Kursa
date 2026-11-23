@@ -39,7 +39,7 @@ Kursa Backend expone una API REST (`/api`) y un canal WebSocket (Socket.IO) que 
 - Autenticación con **JWT** (access + refresh token) y control de acceso por roles (`admin`, `profesor`, `estudiante`).
 - Gestión de **cursos**, **asignaturas** y **lecciones** con contenidos de tipo texto, imagen, vídeo y archivo.
 - **Inscripciones** a cursos y consulta de matrícula.
-- **Tareas**: creación, entrega de archivos, listado de entregas y calificación con feedback.
+- **Tareas**: creación, entrega de archivos, listado de entregas y calificación con comentarios.
 - **Subida de archivos** con validación de MIME y límite de tamaño.
 - **Grabaciones** asociadas a asignaturas.
 - **Tiempo real**: salas (rooms), señalización para videollamadas y chat.
