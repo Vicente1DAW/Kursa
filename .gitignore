@@ -10,6 +10,7 @@ coverage/
 .DS_Store
 .pnp
 .pnp.js
+.vercel/
 *.local
 *.tsbuildinfo
 .turbo/
