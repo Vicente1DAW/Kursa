@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import { useAuth } from "../store/AuthContext";
@@ -128,9 +128,9 @@ export default function RegisterPage() {
 
           <p className="mt-4 text-sm text-center text-muted-foreground">
             ¿Ya tienes cuenta?{" "}
-            <a href="/login" className="font-medium text-primary hover:underline">
+            <Link to="/login" className="font-medium text-primary hover:underline">
               Iniciar sesión
-            </a>
+            </Link>
           </p>
         </CardContent>
       </Card>

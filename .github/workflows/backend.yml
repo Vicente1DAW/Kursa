@@ -6,6 +6,7 @@ on:
     branches: [main, develop, hotfix]
     paths:
       - 'apps/backend/**'
+      - '.node-version'
       - '.github/workflows/backend.yml'
   pull_request:
     branches: [main, develop, hotfix]
@@ -20,10 +21,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version-file: .node-version
           cache: npm
           cache-dependency-path: apps/backend/package-lock.json
-      - run: npm ci
+      - name: Install dependencies (including build tools)
+        run: npm ci --include=dev
+        env:
+          NODE_ENV: production
       - run: npm test
       - run: npm run build
 
@@ -41,13 +45,36 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version-file: .node-version
           cache: npm
           cache-dependency-path: apps/backend/package-lock.json
-      - run: npm ci
+      - run: npm ci --include=dev
       - name: Push database schema to Neon Production
         run: node scripts/push-schema.js
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Deploy to Render
-        run: curl --fail --silent --show-error --request POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          DEPLOY_SHA: ${{ github.sha }}
+          BACKEND_URL: https://kursa-backend-ea93.onrender.com
+        run: |
+          set -euo pipefail
+
+          curl --fail --silent --show-error --request POST "${RENDER_DEPLOY_HOOK}&ref=${DEPLOY_SHA}" >/dev/null
+
+          for attempt in $(seq 1 45); do
+            response=$(curl --fail --silent --show-error --max-time 10 "${BACKEND_URL}/api/health" 2>/dev/null || true)
+            deployed_sha=$(jq -r '.commit // empty' <<<"${response}" 2>/dev/null || true)
+
+            if [[ "${deployed_sha}" == "${DEPLOY_SHA}" ]]; then
+              echo "Render está sirviendo ${DEPLOY_SHA} y la comprobación de base de datos ha respondido correctamente."
+              exit 0
+            fi
+
+            echo "Esperando a Render: intento ${attempt}/45; commit activo: ${deployed_sha:-todavía no disponible}."
+            sleep 10
+          done
+
+          echo "Render no ha publicado ${DEPLOY_SHA} con una base de datos accesible dentro del tiempo límite." >&2
+          exit 1

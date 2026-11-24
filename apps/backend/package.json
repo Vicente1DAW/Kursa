@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Plataforma educativa tipo Aules - Backend Node.js + TypeScript + PostgreSQL (Neon)",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=24.22.1 <25"
   },
   "main": "dist/src/app.js",
   "scripts": {

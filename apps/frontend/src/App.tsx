@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { AuthProvider } from "./store/AuthContext";
-import { SocketProvider } from "./store/SocketContext";
 import AppLayout from "./components/layout/AppLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -13,7 +12,6 @@ import LessonPage from "./pages/LessonPage";
 import AssignmentPage from "./pages/AssignmentPage";
 import GradesPage from "./pages/GradesPage";
 import ProfilePage from "./pages/ProfilePage";
-import VideoCallPage from "./pages/VideoCallPage";
 import RecordingsPage from "./pages/RecordingsPage";
 import AdminPage from "./pages/AdminPage";
 import ProfesorPage from "./pages/ProfesorPage";
@@ -69,7 +67,6 @@ function AppRouter() {
           }
         />
         <Route path="/assignments/:assignmentId" element={<AssignmentPage />} />
-        <Route path="/videocall/:roomId" element={<VideoCallPage />} />
         <Route path="/recordings/:subjectId" element={<RecordingsPage />} />
       </Route>
 
@@ -82,11 +79,9 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <SocketProvider>
-          <BrowserRouter>
-            <AppRouter />
-          </BrowserRouter>
-        </SocketProvider>
+        <BrowserRouter>
+          <AppRouter />
+        </BrowserRouter>
       </AuthProvider>
     </QueryClientProvider>
   );

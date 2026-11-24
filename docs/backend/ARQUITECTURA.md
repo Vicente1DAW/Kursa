@@ -103,4 +103,4 @@ Eventos principales:
 
 ## 9. Documentos relacionados
 
-- [API.md](API.md) · [DATABASE.md](DATABASE.md) · [política de calidad](../CALIDAD.md)
+- [API.md](API.md) · [BASE_DE_DATOS.md](BASE_DE_DATOS.md) · [política de calidad](../CALIDAD.md)

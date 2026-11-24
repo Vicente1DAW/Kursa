@@ -45,7 +45,7 @@ UPLOAD_DIR=/tmp/uploads
 | Entorno | Base de datos | Dónde se configura |
 | :--- | :--- | :--- |
 | Desarrollo | `kursa-dev` | `.env` local |
-| Producción | `kursa-prod` | Panel del proveedor (Vercel/Railway/Render, etc.) |
+| Producción | Base de datos configurada para el servicio | Secreto `DATABASE_URL` de GitHub Actions para el paso de esquema y variables del servicio Render. |
 
 ## Buenas prácticas
 

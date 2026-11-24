@@ -9,6 +9,7 @@ import { env } from "./config/env";
 import { logger } from "./utils/logger";
 import { initSocket } from "./socket/socket.server";
 import { createServer } from "http";
+import { pool } from "./config/db";
 
 export const app: Application = express();
 
@@ -17,6 +18,18 @@ app.use(cors({ origin: env.CORS_ORIGIN, credentials: true }));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.get("/api/health", async (_req, res) => {
+  try {
+    await pool.query("SELECT 1");
+    res.json({
+      status: "ok",
+      commit: process.env.RENDER_GIT_COMMIT ?? process.env.GITHUB_SHA ?? "local",
+    });
+  } catch {
+    res.status(503).json({ status: "unavailable" });
+  }
+});
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
