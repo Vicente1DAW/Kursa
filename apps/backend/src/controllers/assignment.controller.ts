@@ -5,6 +5,7 @@ import { HTTP_STATUS } from "../utils/constants";
 import { assignmentSchema } from "../types/schemas";
 import { AuthenticatedRequest } from "../types";
 import { upload } from "../middleware/upload.middleware";
+import { parseRouteId } from "../utils/parse-route-id";
 
 export const assignmentController = {
   async create(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -19,7 +20,7 @@ export const assignmentController = {
 
   async listBySubject(req: Request, res: Response): Promise<void> {
     try {
-      const assignments = await assignmentService.listBySubject(parseInt(req.params.subjectId));
+      const assignments = await assignmentService.listBySubject(parseRouteId(req.params.subjectId));
       res.json(successResponse(assignments));
     } catch (error: any) {
       res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(errorResponse(error.message));
@@ -28,7 +29,7 @@ export const assignmentController = {
 
   async submit(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      const assignmentId = parseInt(req.params.assignmentId);
+      const assignmentId = parseRouteId(req.params.assignmentId);
       const files = req.files as Express.Multer.File[];
       const fileUrls = files.map((f) => `/uploads/${f.filename}`);
       const submission = await submissionService.create(assignmentId, req.user!.userId, fileUrls);
@@ -40,7 +41,7 @@ export const assignmentController = {
 
   async listByAssignment(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      const submissions = await submissionService.listByAssignment(parseInt(req.params.assignmentId));
+      const submissions = await submissionService.listByAssignment(parseRouteId(req.params.assignmentId));
       res.json(successResponse(submissions));
     } catch (error: any) {
       res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(errorResponse(error.message));
@@ -49,7 +50,7 @@ export const assignmentController = {
 
   async grade(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
-      const submissionId = parseInt(req.params.submissionId);
+      const submissionId = parseRouteId(req.params.submissionId);
       const { grade, feedback } = req.body;
       const submission = await submissionService.grade(submissionId, grade, feedback);
       res.json(successResponse(submission, "Calificación registrada"));
@@ -88,7 +89,7 @@ export const recordingController = {
 
   async listBySubject(req: Request, res: Response): Promise<void> {
     try {
-      const recordings = await recordingService.listBySubject(parseInt(req.params.subjectId));
+      const recordings = await recordingService.listBySubject(parseRouteId(req.params.subjectId));
       res.json(successResponse(recordings));
     } catch (error: any) {
       res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(errorResponse(error.message));

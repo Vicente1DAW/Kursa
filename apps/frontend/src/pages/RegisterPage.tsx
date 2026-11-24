@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
 
 import { useAuth } from "../store/AuthContext";
 import { useRegister } from "../hooks/useAuthForms";
@@ -11,11 +12,10 @@ import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 
-type RegisterFormData = {
-  email: string;
-  password: string;
-  role: "admin" | "profesor" | "estudiante";
-};
+import { registerSchema } from "../schemas/auth.schema";
+
+type RegisterFormInput = z.input<typeof registerSchema>;
+type RegisterFormData = z.output<typeof registerSchema>;
 
 const getErrorMessage = (error: unknown): string | undefined => {
   if (typeof error === "object" && error !== null && "response" in error) {
@@ -35,7 +35,7 @@ export default function RegisterPage() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<RegisterFormData>({
+  } = useForm<RegisterFormInput, unknown, RegisterFormData>({
     resolver: zodResolver(schema),
     defaultValues,
   });

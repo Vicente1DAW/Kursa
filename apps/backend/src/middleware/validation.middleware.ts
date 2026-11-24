@@ -1,23 +1,19 @@
 import { Request, Response, NextFunction } from "express";
-import { ZodSchema } from "zod";
+import { ZodError, ZodType } from "zod";
 import { HTTP_STATUS } from "../utils/constants";
 import { errorResponse } from "../utils/response";
 
-interface ValidationIssue {
-  path: Array<string | number>;
-  message: string;
-}
-
 const formatIssues = (error: unknown): string | undefined => {
-  if (typeof error !== "object" || error === null || !("errors" in error)) {
+  if (!(error instanceof ZodError)) {
     return undefined;
   }
 
-  const issues = (error as { errors: ValidationIssue[] }).errors;
-  return issues.map((issue) => `${issue.path.join(".") || "body"}: ${issue.message}`).join("; ");
+  return error.issues
+    .map((issue) => `${issue.path.map(String).join(".") || "body"}: ${issue.message}`)
+    .join("; ");
 };
 
-export const validate = (schema: ZodSchema, property: "body" | "query" | "params" = "body") => {
+export const validate = (schema: ZodType, property: "body" | "query" | "params" = "body") => {
   return (req: Request, res: Response, next: NextFunction): void => {
     try {
       const parsed = schema.parse(req[property]);
