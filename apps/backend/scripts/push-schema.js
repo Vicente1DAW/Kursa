@@ -157,16 +157,22 @@ const statements = [
 ];
 
 (async () => {
+  const client = await pool.connect();
+
   try {
+    await client.query("BEGIN");
     for (let i = 0; i < statements.length; i++) {
-      await pool.query(statements[i]);
+      await client.query(statements[i]);
       console.log(`[${i + 1}/${statements.length}] OK`);
     }
+    await client.query("COMMIT");
     console.log("\n✅ Esquema aplicado correctamente a Neon (kursa-prod).");
   } catch (err) {
+    await client.query("ROLLBACK").catch(() => undefined);
     console.error("\n❌ Error aplicando esquema:", err.message);
-    process.exit(1);
+    process.exitCode = 1;
   } finally {
+    client.release();
     await pool.end();
   }
 })();
