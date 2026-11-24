@@ -7,7 +7,6 @@ on:
     paths:
       - 'apps/backend/**'
       - '.node-version'
-      - 'render.yaml'
       - '.github/workflows/backend.yml'
   pull_request:
     branches: [main, develop, hotfix]

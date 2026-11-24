@@ -7,13 +7,11 @@ Vite solo expone al cliente las variables que empiezan por `VITE_`. Se leen con 
 | Variable | Obligatoria | Por defecto | Descripción |
 | :--- | :---: | :--- | :--- |
 | `VITE_API_URL` | ❌ | `http://localhost:4000/api` | URL base de la API REST. |
-| `VITE_SOCKET_URL` | ❌ | `http://localhost:4000` | URL del servidor Socket.IO. |
 
 ## Ejemplo
 
 ```env
 VITE_API_URL=http://localhost:4000/api
-VITE_SOCKET_URL=http://localhost:4000
 ```
 
 ## Entornos
@@ -25,6 +23,7 @@ VITE_SOCKET_URL=http://localhost:4000
 
 ## Notas
 
+- El frontend todavía no consume Socket.IO; no configures una URL de socket hasta implementar ese cliente.
 - Los cambios en `.env` requieren reiniciar el servidor de desarrollo.
 - En producción, configura estas variables en el panel del hosting antes del build.
 - No incluyas secretos en variables `VITE_*`: se exponen en el bundle del navegador.

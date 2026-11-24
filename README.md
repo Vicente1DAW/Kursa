@@ -10,7 +10,7 @@ Kursa es una plataforma educativa formada por una aplicación web y una API. Amb
 
 ## Puesta en marcha
 
-Se necesita Node.js 20 o posterior y npm 10 o posterior. Instala y arranca cada aplicación en una terminal distinta:
+Se necesita Node.js `24.22.1` y npm 10 o posterior. Instala y arranca cada aplicación en una terminal distinta:
 
 ```bash
 cd apps/backend

@@ -22,7 +22,7 @@ GitHub Actions ejecuta las comprobaciones en las PR hacia `main` y solo desplieg
 
 - Mantén TypeScript en modo estricto, valida los formularios con Zod y crea interfaces accesibles y adaptables.
 - Mantén o mejora la cobertura del código modificado; el objetivo para módulos nuevos es al menos un 70 %.
-- Ejecuta `npm runa prueba:coverage` al modificar partes importantes de la lógica del frontend.
+- Ejecuta `npm run test:coverage` al modificar partes importantes de la lógica del frontend.
 
 ## Requisitos del backend
 

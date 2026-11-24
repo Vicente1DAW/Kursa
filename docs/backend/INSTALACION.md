@@ -2,7 +2,7 @@
 
 ## 1. Requisitos
 
-- **Node.js 20+** y **npm 10+**
+- **Node.js 24.22.1** y **npm 10+**
 - **Git**
 - Una base de datos **PostgreSQL**. Se recomienda [Neon](https://neon.tech) (plan gratuito).
 
@@ -52,7 +52,7 @@ CORS_ORIGIN=http://localhost:5173
 SOCKET_ORIGIN=http://localhost:5173
 ```
 
-Consulta la referencia completa en [ENVIRONMENT.md](ENVIRONMENT.md).
+Consulta la referencia completa en [CONFIGURACION.md](CONFIGURACION.md).
 
 ## 6. Crear las tablas
 
@@ -97,7 +97,7 @@ npm start
 ## 9. Ejecutar las pruebas
 
 ```bash
-npm runa prueba
+npm test
 ```
 
 Obligatorio según [política de calidad común](../CALIDAD.md).
@@ -110,7 +110,7 @@ Obligatorio según [política de calidad común](../CALIDAD.md).
 | `ECONNREFUSED` / timeout a la base de datos | URL incorrecta o base inaccesible. | Verifica la cadena de Neon y `sslmode=require`. |
 | Tablas inexistentes | No se ejecutó `db:push`. | Ejecuta `npm run db:push`. |
 | CORS bloqueado | `CORS_ORIGIN` no coincide con el frontend. | Ajusta `CORS_ORIGIN`/`SOCKET_ORIGIN`. |
-| Socket no conecta | URL u origen incorrectos. | Revisa `SOCKET_ORIGIN` y la `VITE_SOCKET_URL` del frontend. |
+| El cliente no conecta con la API | URL u origen incorrectos. | Revisa `CORS_ORIGIN` y la URL `VITE_API_URL` del frontend. |
 
 ## 11. Otra aplicación
 
